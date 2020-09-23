@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title1']    = 'TLS Social Login';
-$_['heading_title']    = '<span style="color:#23A8DA;font-weight:bold;">TLS Social Login</span>';
+$_['heading_title1']    = 'Opencart Social Login';
+$_['heading_title']    = '<span style="color:#23A8DA;font-weight:bold;">Opencart Social Login</span>';
 // Text
 $_['text_extension']   = 'Extensions';
-$_['text_success']     = 'Success: You have modified TLSsociallogin module!';
-$_['text_edit']        = 'Edit TLS Social Login Module';
+$_['text_success']     = 'Success: You have modified opencart social login module!';
+$_['text_edit']        = 'Edit Opencart Social Login Module';
 
 // Entry
 $_['entry_name']       = 'Module Name';
