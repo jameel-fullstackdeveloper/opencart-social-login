@@ -1,0 +1,331 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-tmdsociallogin" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+     <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+     {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times</button>
+    </div>
+    {% endif %}
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+	   <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-setting" data-toggle="tab">{{ tab_setting }}  <i class="fa fa-cog fa-fw"></i></a></li>
+            <li><a href="#tab-facbook" data-toggle="tab">{{ tab_facbook }}  <i class="fa fa-facebook"></i></a></li>
+            <li><a href="#tab-twitter" data-toggle="tab">{{ tab_twitter }}  <i class="fa fa-twitter-square"></i></a></li>
+            <li><a href="#tab-google" data-toggle="tab">{{ tab_google }}  <i class="fa fa-google"></i></a></li>
+            <li><a href="#tab-linkedin" data-toggle="tab">{{ tab_linkedin }}  <i class="fa fa-linkedin-square"></i></a></li>
+          </ul>
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-tmdsociallogin" class="form-horizontal">
+          
+		<div class="tab-content">
+			<div class="tab-pane active in" id="tab-setting">
+			  
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+				<div class="col-sm-10">
+				  <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+				  {% if error_name  %}
+				  <div class="text-danger">{{ error_name }}</div>
+				   {% endif %}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-icon">{{ entry_iconsize }}</label>
+				<div class="col-sm-10">
+				<div class="row">
+					<div class="col-sm-6">
+						<input type="text" name="width" value="{{ width }}" placeholder="" id="input-width" class="form-control" />
+					</div>
+					<div class=" col-sm-6">
+						<input type="text" name="height" value="{{ height }}" placeholder="" id="input-height" class="form-control" />
+					</div>
+				</div>
+				</div>
+			</div>
+			  
+			   
+			<div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+				<div class="col-sm-10">
+				  <select name="status" id="input-status" class="form-control">
+					{% if (status) %}
+					<option value="1" selected="selected">{{ text_enabled }}</option>
+					<option value="0">{{ text_disabled }}</option>
+					{%  else %}
+					<option value="1">{{ text_enabled }}</option>
+					<option value="0" selected="selected">{{ text_disabled }}</option>
+					 {% endif %}
+				  </select>
+				</div>
+            </div>
+			</div>
+			
+			<div class="tab-pane" id="tab-facbook">
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-fbtitle">{{ entry_title }}</label>
+				<div class="col-sm-10">
+				  <input type="text" name="fbtitle" value="{{ fbtitle }}" placeholder="{{ entry_title }}" id="input-fbtitle" class="form-control" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+                <label class="col-sm-2 control-label" for="input-fbimage">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                  <a href="" id="thumb-fbimage" data-toggle="image" class="img-thumbnail"><img src="{{ fbthumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="fbimage" value="{{ fbimage }}" id="input-fbimage" />
+                </div>
+            </div> 
+			  
+			<div class="form-group">
+		        <label class="col-sm-2 control-label" for="input-fbapikey">{{ entry_apikey }}</label>  
+				
+				<div class="col-sm-6">
+					<input type="text" name="fbapikey" id="fb-apikey" value="{{ fbapikey }}" class="form-control"/> 
+		         
+				 {% if error_fbapikey %}
+				  <div class="text-danger">{{ error_fbapikey }}</div>
+				   {% endif %}
+		         </div>
+				 <div class="col-sm-4">
+					{{ text_fblink }}
+		         </div>
+			</div>
+			
+			 <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-fbsecretapi">{{ entry_apisecret }}</label>  
+				 
+				 <div class="col-sm-10">
+				 <input type="text" name="fbsecretapi" id="fb-apisecret" value="{{ fbsecretapi }}" class="form-control"/> 
+				 {% if error_fbsecretapi %}
+				  <div class="text-danger">{{ error_fbsecretapi }}</div>
+				   {% endif %}
+				 </div>
+			</div>
+			
+			  
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-fbstatus">{{ entry_status }}</label>
+				<div class="col-sm-10">
+				  <select name="fbstatus" id="input-fbstatus" class="form-control">
+					{% if fbstatus %}
+					<option value="1" selected="selected">{{ text_enabled }}</option>
+					<option value="0">{{ text_disabled }}</option>
+					{% else %}
+					<option value="1">{{ text_enabled }}</option>
+					<option value="0" selected="selected">{{ text_disabled }}</option>
+					 {% endif %}
+				  </select>
+				</div>
+			  </div>
+			 
+			</div>
+			
+			<div class="tab-pane" id="tab-twitter">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-twittertitle">{{ entry_title }}</label>
+					<div class="col-sm-10">
+					  <input type="text" name="twittertitle" value="{{ twittertitle }}" placeholder="{{ entry_title }}" id="input-twittertitle" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+                <label class="col-sm-2 control-label" for="input-twitimage">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                  <a href="" id="thumb-twitimage" data-toggle="image" class="img-thumbnail"><img src="{{ twiterthumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="twitimage" value="{{ twitimage }}" id="input-twitimage" />
+                </div>
+				</div> 
+			  
+				
+				<div class="form-group">
+		        <label class="col-sm-2 control-label" for="input-twitapikey">{{ entry_twapikey }}</label>  
+				
+				<div class="col-sm-6">
+					<input type="text" name="twitapikey" id="twit-apikey" value="{{ twitapikey }}" class="form-control"/> 
+		           {% if error_twitapikey %}
+				  <div class="text-danger">{{ error_twitapikey }}</div>
+				  {% endif %}
+		         </div>
+				 <div class="col-sm-4">
+					{{ text_twitlink }}
+		         </div>
+				</div>
+			
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-twitsecretapi">{{ entry_twapisecret }}</label>  
+					 
+					 <div class="col-sm-10">
+					 <input type="text" name="twitsecretapi" id="twit-apisecret" value="{{ twitsecretapi }}" class="form-control"/> 
+					   {% if error_twitsecret %}
+				  <div class="text-danger">{{ error_twitsecret }}</div>
+ 						{% endif %}
+ 					 </div>
+				</div>
+			
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-twitstatus">{{ entry_status }}</label>
+					<div class="col-sm-10">
+					  <select name="twitstatus" id="input-twitstatus" class="form-control">
+						{% if twitstatus %}
+						<option value="1" selected="selected">{{ text_enabled }}</option>
+						<option value="0">{{ text_disabled }}</option>
+						{% else %}
+						<option value="1">{{ text_enabled }}</option>
+						<option value="0" selected="selected">{{ text_disabled }}</option>
+						 {% endif %}
+					  </select>
+					</div>
+			  </div>
+			</div>
+			
+			<div class="tab-pane" id="tab-google">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-googletitle">{{ entry_title }}</label>
+					<div class="col-sm-10">
+					  <input type="text" name="googletitle" value="{{ googletitle }}" placeholder="{{ entry_title }}" id="input-googletitle" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+                <label class="col-sm-2 control-label" for="input-gogleimage">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                  <a href="" id="thumb-gogleimage" data-toggle="image" class="img-thumbnail"><img src="{{ goglethumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="gogleimage" value="{{ gogleimage }}" id="input-gogleimage" />
+                </div>
+				</div> 
+				
+				<div class="form-group">
+		        <label class="col-sm-2 control-label" for="input-gogleapikey">{{ entry_goapikey }}</label>  
+				
+				<div class="col-sm-6">
+					<input type="text" name="gogleapikey" id="gogle-apikey" value="{{ gogleapikey }}" class="form-control"/> 
+		         
+				{% if error_gogleapikey %}
+				  <div class="text-danger">{{ error_gogleapikey }}</div>
+				{% endif %}
+
+		         </div>
+				 <div class="col-sm-4">
+					{{ text_gogllink }}
+		         </div>
+				</div>
+			
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-gogelsecretapi">{{ entry_goapisecret }}</label>  
+					 
+					 <div class="col-sm-10">
+					 <input type="text" name="gogelsecretapi" id="gogle-secret" value="{{ gogelsecretapi }}" class="form-control"/>
+					
+					{% if error_goglesecret %}
+				  <div class="text-danger">{{ error_goglesecret }}</div>
+				   {% endif %}
+				  	
+					 </div>
+				</div>
+			
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-goglestatus">{{ entry_status }}</label>
+					<div class="col-sm-10">
+					  <select name="goglestatus" id="input-goglestatus" class="form-control">
+						{% if goglestatus %}
+						<option value="1" selected="selected">{{ text_enabled }}</option>
+						<option value="0">{{ text_disabled }}</option>
+						{%  else %}
+						<option value="1">{{ text_enabled }}</option>
+						<option value="0" selected="selected">{{ text_disabled }}</option>
+						 {% endif %}
+					  </select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="tab-pane" id="tab-linkedin">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-linkedintitle">{{ entry_title }}</label>
+					<div class="col-sm-10">
+					  <input type="text" name="linkedintitle" value="{{ linkedintitle }}" placeholder="{{ entry_title }}" id="input-linkedintitle" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+                <label class="col-sm-2 control-label" for="input-linkdinimage">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                  <a href="" id="thumb-linkdinimage" data-toggle="image" class="img-thumbnail"><img src="{{ linkdinthumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="linkdinimage" value="{{ linkdinimage }}" id="input-linkdinimage" />
+                </div>
+				</div> 
+				
+				<div class="form-group">
+		        <label class="col-sm-2 control-label" for="input-linkdinapikey">{{ entry_liapikey }}</label>  
+				
+				<div class="col-sm-6">
+					<input type="text" name="linkdinapikey" id="linkdin-apikey" value="{{ linkdinapikey }}" class="form-control"/> 
+		         {% if error_linkdinapikey %}
+				  <div class="text-danger">{{ error_linkdinapikey }}</div>
+				   {% endif %}
+				  	  
+		         </div>
+				 <div class="col-sm-4">
+					{{ text_linkdinlink }}
+		         </div>
+			</div>
+			
+			 <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-linkdinsecretapi">{{ entry_liapisecret }}</label>  
+				 
+				 <div class="col-sm-10">
+				 <input type="text" name="linkdinsecretapi" id="linkdin-apisecret" value="{{ linkdinsecretapi }}" class="form-control"/>
+				
+				{% if (error_linkdinsecret) %}
+				  <div class="text-danger">{{ error_linkdinsecret }}</div>
+				   {% endif %}				 
+				 </div>
+			</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-linkstatus">{{ entry_status }}</label>
+					<div class="col-sm-10">
+					  <select name="linkstatus" id="input-linkstatus" class="form-control">
+						{% if linkstatus %}
+						<option value="1" selected="selected">{{ text_enabled }}</option>
+						<option value="0">{{ text_disabled }}</option>
+						 {% else %}
+						<option value="1">{{ text_enabled }}</option>
+						<option value="0" selected="selected">{{ text_disabled }}</option>
+						 {% endif %}
+					  </select>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		</div>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ footer }}
+
+  <script type="text/javascript"><!--
+('#language a:first').tab('show')
+//--></script>
